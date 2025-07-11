@@ -16,6 +16,7 @@ function submitForm(data) {
     emptyRowIndex = lastRow + 1;
   }
 
+  
 //above this line you don't have to edit any code you have to only focus on below code
 
   sheet.getRange(emptyRowIndex, 1, 1, 25).setValues([[
@@ -26,4 +27,23 @@ function submitForm(data) {
     data.quantity,
     data.uNit
   ]]);
+}
+
+
+//YOU HAVE TO ADD BELOW CODE ALSO SO THAT showForm can it whenever it gets open.
+
+function showForm() {
+  const html = HtmlService.createHtmlOutputFromFile("SalesForm")
+    .setWidth(400)
+    .setHeight(650);
+  SpreadsheetApp.getUi().showModalDialog(html, "Add Purchase Entry");
+}
+// GetUi to add this in to Google sheet Menu
+
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Open Form")
+    .addItem("Entry Form", "showForm")
+    //.addItem("Open It", "openGitHubProfile") **You can add more menu by using .addItem in this section**
+    .addToUi();
 }
